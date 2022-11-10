@@ -1,0 +1,67 @@
+#full-screen .fulls {
+  height: 100%;
+}
+
+#map {
+  height: 500px;
+}
+
+.login li a {
+  text-decoration: none;
+  color: white;
+  padding: 7px;
+  border-radius: 5px;
+  background: red;
+  transition: .5s;
+}
+
+.login li a:hover {
+  color: #090945;
+  background: white
+}
+
+.login li {
+  list-style-type: none;
+}
+
+.login {
+  margin-top: 10px;
+  margin-right: 10px
+}
+
+.bg-nav {
+  background-color: #090945;
+  border-bottom: 5px solid red;
+}
+
+.navbar-brand {
+  font-style: italic;
+  font-weight: bolder;
+  transition: .3s;
+}
+
+.navbar-brand:hover {
+  color: red;
+}
+
+footer {
+  background-color: #090945;
+  border-top: 5px solid red;
+  color: white;
+
+}
+
+footer a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-style: italic;
+}
+
+footer a:hover {
+  color: red;
+}
+
+footer .footer-copyright {
+  color: grey;
+}
