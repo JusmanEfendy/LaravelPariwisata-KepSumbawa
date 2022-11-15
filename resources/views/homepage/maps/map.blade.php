@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>test-map</title>
+    <title>{{ $title }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
@@ -36,13 +36,22 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
                                 @foreach ($kategori as $kat)
-                                    <li><a class="dropdown-item" href="/{{ $kat->nama }}">{{ $kat->nama }}</a>
+                                    <li><a class="dropdown-item" href="/maps">{{ $kat->nama }}</a>
                                     </li>
                                 @endforeach
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">RUTE WISATA</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                KABUPATEN
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                                @foreach ($kabupaten as $kab)
+                                    <li><a class="dropdown-item" href="/maps">{{ $kab->nama }}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
                         </li>
                     </ul>
                     <ul class="d-flex login">
@@ -51,12 +60,35 @@
                 </div>
             </div>
         </nav>
-        <div>
+        <div class="detail">
             <div id="map"></div>
+        </div>
+
+        {{-- <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Launch demo modal
+        </button> --}}
+
+        <!-- Modal -->
+        <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Detail Wisata</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
         </div>
         <footer class="page-footer blue">
             <div class="footer-copyright text-center py-3">{{ $production }}
-                <a href="https://portfolio-jussy-tailwind.vercel.app/" target="_blank"> {{ $title }}
+                <a href="https://portfolio-jussy-tailwind.vercel.app/" target="_blank"> {{ $creator }}
             </div>
         </footer>
     </div>

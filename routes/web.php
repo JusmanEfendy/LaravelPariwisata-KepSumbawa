@@ -9,6 +9,7 @@ Route::get('/', function () {
 
 Route::get('/maps', [MapsController::class, 'index'])->name('maps');
 Route::get('/titik', [MapsController::class, 'titik'])->name('titik');
+Route::get('/titik/{id}', [MapsController::class, 'titik'])->name('titik');
 
 
 Route::group([

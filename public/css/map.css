@@ -44,6 +44,11 @@
   color: red;
 }
 
+.legend {
+  padding: 10px;
+  background-color: aliceblue;
+}
+
 footer {
   background-color: #090945;
   border-top: 5px solid red;
@@ -64,4 +69,39 @@ footer a:hover {
 
 footer .footer-copyright {
   color: grey;
+}
+
+@media screen and (max-width: 768px) {
+  #map {
+      height: 87vh;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  #map {
+      height: 83vh;
+  }
+}
+
+@media screen and (min-width: 390px) and (max-width: 500px) {
+  #map {
+      height: 89vh;
+  }
+}
+
+@media screen and (max-width: 280px) {
+  #map {
+      height: 83vh;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  #map {
+      height: 85vh;
+  }
+}
+@media screen and (min-width: 1300px) and (max-width: 1500px) {
+  #map {
+      height:83vh;
+  }
 }
