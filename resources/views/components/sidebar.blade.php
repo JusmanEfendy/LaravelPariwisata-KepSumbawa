@@ -13,7 +13,7 @@
     <hr class="sidebar-divider mb-0">
 
     @can('member-list')
-        <x-nav-link text="Admin" icon="users" url="{{ route('admin.member') }}"
+        <x-nav-link text="Admin" icon="male" url="{{ route('admin.member') }}"
             active="{{ request()->routeIs('admin.member') ? ' active' : '' }}" />
     @endcan
 
@@ -23,27 +23,27 @@
     @endcan
 
     @can('member-list')
-        <x-nav-link text="Kategori Wisata" icon="users" url="{{ route('admin.kategori') }}"
+        <x-nav-link text="Kategori Wisata" icon="archive" url="{{ route('admin.kategori') }}"
             active="{{ request()->routeIs('admin.kategori') ? ' active' : '' }}" />
     @endcan
 
     @can('member-list')
-        <x-nav-link text="Wisata" icon="users" url="{{ route('admin.wisata') }}"
+        <x-nav-link text="Wisata" icon="compass" url="{{ route('admin.wisata') }}"
             active="{{ request()->routeIs('admin.wisata') ? ' active' : '' }}" />
     @endcan
 
     @can('member-list')
-        <x-nav-link text="Data Kabupaten" icon="users" url="{{ route('admin.kabupaten') }}"
+        <x-nav-link text="Data Kabupaten" icon="hospital" url="{{ route('admin.kabupaten') }}"
             active="{{ request()->routeIs('admin.kabupaten') ? ' active' : '' }}" />
     @endcan
 
     @can('member-list')
-        <x-nav-link text="Data Kecamatan" icon="users" url="{{ route('admin.kecamatan') }}"
+        <x-nav-link text="Data Kecamatan" icon="road" url="{{ route('admin.kecamatan') }}"
             active="{{ request()->routeIs('admin.kecamatan') ? ' active' : '' }}" />
     @endcan
 
     @can('member-list')
-        <x-nav-link text="Data Kelurahan" icon="users" url="{{ route('admin.kelurahan') }}"
+        <x-nav-link text="Data Kelurahan" icon="anchor" url="{{ route('admin.kelurahan') }}"
             active="{{ request()->routeIs('admin.kelurahan') ? ' active' : '' }}" />
     @endcan
 

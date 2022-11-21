@@ -24,7 +24,8 @@
                         <td>{{ $kec->kabupaten->nama }}</td>
                         <td class="text-center">
                             <button type="button" class="btn btn-info mr-1 info" data-name="{{ $kec->nama }}"
-                                data-created="{{ $kec->created_at->format('d-M-Y H:m:s') }}">
+                                data-created="{{ $kec->created_at->format('d-M-Y H:m:s') }}"
+                                data-kabupaten="{{ $kec->kabupaten->nama }}">
                                 <i class="fas fa-eye"></i>
                             </button>
                             <a href="{{ route('admin.kecamatan.edit', $kec->id) }}" class="btn btn-primary mr-1"><i
@@ -54,6 +55,14 @@
             </div>
             <div class="col-6" id="name-modal"></div>
         </div>
+
+        <div class="row mb-2">
+            <div class="col-6">
+                <b>Kabupaten</b>
+            </div>
+            <div class="col-6" id="kab-modal"></div>
+        </div>
+
         <div class="row mb-2">
             <div class="col-6">
                 <b>Created</b>
@@ -67,6 +76,8 @@
                 e.preventDefault()
 
                 $('#name-modal').text($(this).data('name'))
+
+                $('#kab-modal').text($(this).data('kabupaten'))
 
                 $('#created-modal').text($(this).data('created'))
 

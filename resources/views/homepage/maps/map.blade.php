@@ -41,19 +41,17 @@
                                 @endforeach
                             </ul>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown"
-                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                KABUPATEN
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                                @foreach ($kabupaten as $kab)
-                                    <li><a class="dropdown-item" href="/maps">{{ $kab->nama }}</a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </li>
+                        <select class="form-select" aria-label="Default select example">
+                            <option selected>KABUPATEN</option>
+                            @foreach ($kabupaten as $kab)
+                                <option value="{{ $kab->id }}">{{ $kab->nama }}</option>
+                            @endforeach
+                        </select>
                     </ul>
+                    {{-- <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Cari..." aria-label="Search">
+                        <button class="btn btn-outline-danger" type="submit">Cari</button>
+                    </form> --}}
                     <ul class="d-flex login">
                         <li><a href="{{ route('login') }}">LOGIN</a></li>
                     </ul>
