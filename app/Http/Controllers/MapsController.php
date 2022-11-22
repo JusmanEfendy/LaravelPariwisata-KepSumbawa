@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kabupaten;
 use Illuminate\Http\Request;
 use App\Models\Maps;
+use App\Models\Wisata;
 use App\Models\Kategori;
 
 class MapsController extends Controller
@@ -21,9 +23,11 @@ class MapsController extends Controller
     public function index()
     {
         $kategori = Kategori::all()->sortBy('nama');
+        $kabupaten = Kabupaten::all()->sortBy('nama');
+        $creator = 'JussyCheta';
+        $title = 'PARIWISATA | KepSumbawa';
         $production = '© 2022 Copyright:';
-        $title = 'JussyCheta';
-        return view('homepage.maps.map', compact('kategori', 'title', 'production'));
+        return view('homepage.maps.map', compact('kategori', 'title', 'production', 'creator', 'kabupaten'));
     }
     // function merubah ke json
     public function titik()
