@@ -1,8 +1,10 @@
 // MAPS
 const map = L.map('map').setView([-8.6327874, 117.6065781], 9);
 const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 19,
-attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">JussyCheta</a>'
+attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
+
+
             
 
 // MARKER COSTUM ICONS
@@ -89,43 +91,147 @@ $(document).ready(function() {
 });
 
 // POLYGON
-$.getJSON('/geojson/kabupaten.geojson', function(data) {
+// $.getJSON('/geojson/kabupaten.geojson', function(data) {
 
+//   geoLayer = L.geoJson(data, {
+//     style: function(feature) {
+//       if (feature.properties.nama == "Bima") {
+//         return {
+//           fillOpacity: 0,
+//           weight: 4,
+//           opacity: 1,
+//           color:'yellow',
+//           dashArray: '10 7',
+//           lineCap: 'square'
+//         };
+//       }else if (feature.properties.nama == "Dompu") {
+//         return {
+//           fillOpacity: 0,
+//           weight: 4,
+//           opacity: 1,
+//           color:'red',
+//           dashArray: '10 7',
+//           lineCap: 'square'
+//         };
+//       }else if (feature.properties.nama == "Sumbawa") {
+//         return {
+//           fillOpacity: 0,
+//           weight: 4,
+//           opacity: 1,
+//           color:'blue',
+//           dashArray: '10 7',
+//           lineCap: 'square'
+//         };
+//       }else if (feature.properties.nama == "Sumbawa Barat") {
+//         return {
+//           fillOpacity: 0,
+//           weight: 4,
+//           opacity: 1,
+//           color:'purple',
+//           dashArray: '10 7',
+//           lineCap: 'square'
+//         };
+//       }else {"Kabupaten Tidak Di Temukan"}
+//     },  
+//     onEachFeature: function(feature, layer) {
+//       // console.log(feature)
+//       // console.log(layer)
+//       let divIcon = L.divIcon({
+//         className : 'bidang-label',
+//         html: `<b>${feature.properties.nama}</b>`,
+//         iconSize : [100,20],
+//       })
+//       L.marker(layer.getBounds().getCenter(),{icon: divIcon}).addTo(map)
+//       layer.addTo(map)
+//     }
+//   })
+// })
+
+
+// Polyline
+// $.getJSON('/geojson/polyline.geojson', function(value) {
+//   // console.log(value)
+// })
+
+// POLYGON PULAU SUMBAWA
+let geoLayer;
+$.getJSON('/geojson/kab-ksb.geojson', function(data) {
   geoLayer = L.geoJson(data, {
     style: function(feature) {
-      if (feature.properties.nama == 'Sumbawa Besar') {
+      if (feature.properties.nama == 'Sumbawa' || feature.properties.nama == 'pulau sbw') {
         return {
-          fillOpacity: .2,
-          weight: 4,
+          fillOpacity: 0,
+          weight: 2,
           opacity: 1,
-          color:'yellow',
-          dashArray: '10 7',
-          lineCap: 'square'
+          color:'blue',
+          // dashArray: '10 7',
+          // lineCap: 'square'
         };
-      }else if (feature.properties.nama == 'Sumbawa Barat') {
+      }else if (feature.properties.nama == 'Sumbawa Barat' || feature.properties.nama == 'pulau ksb') {
         return {
-          fillOpacity: .2,
-          weight: 4,
+          fillOpacity: 0,
+          weight: 2,
           opacity: 1,
           color:'red',
-          dashArray: '10 7',
-          lineCap: 'square'
-        };
-      }  
+          // dashArray: '10 5',
+          // lineCap: 'square'
+        }
+      }
     },  
     onEachFeature: function(feature, layer) {
       // console.log(feature)
       // console.log(layer)
-      let divIcon = L.divIcon({
+      if(feature.properties.nama !== 'Sumbawa' && feature.properties.nama !== 'Sumbawa Barat') {
+        let divIcon = L.divIcon({
+          className : 'bidang-label',
+          // html: `<b>${feature.properties.nama}</b>`,
+          iconSize : [100,20],
+        })
+        L.marker(layer.getBounds().getCenter(),{icon: divIcon}).addTo(map)
+        layer.addTo(map)
+      }else {
+        let divIcon = L.divIcon({
         className : 'bidang-label',
         html: `<b>${feature.properties.nama}</b>`,
         iconSize : [100,20],
       })
       L.marker(layer.getBounds().getCenter(),{icon: divIcon}).addTo(map)
       layer.addTo(map)
+      }     
     }
   })
 })
 
+// HASH
+var hash = new L.Hash(map);
 
-// LEGEND
+// MOUSE POSITION
+L.control.mousePosition().addTo(map);
+
+// event klik mendapatkan latlng
+const koordinat = () => map.on('click', function (e) {
+  alert(e.latlng)
+})
+
+// DISTANCE / RULER
+var options = {
+  position: 'topleft',
+  lengthUnit: {
+    factor: null,    //  from km to nm
+    display: 'km',
+    decimal: 2,
+    label: 'jarak/km:'
+  }
+};
+L.control.ruler(options).addTo(map);
+
+// PENCARIAN FEATURE
+function searchKab (nama) {
+  geoLayer.eachLayer(function(feature){
+    if(feature.feature.properties.nama == nama ) {
+      map.flyTo(feature.getBounds().getCenter(), 10)
+    }
+  })
+}
+
+// LAGEND

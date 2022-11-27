@@ -40,11 +40,11 @@
             <!-- Area Charts -->
             <div class="card mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Area Chart</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Peta Kepulauan Sumbawa</h6>
                 </div>
                 <div class="card-body">
                     <div class="chart-area">
-                        <canvas id="myAreaChart"></canvas>
+                        <div id="map" class="maps"></div>
                     </div>
                 </div>
             </div>
@@ -52,6 +52,6 @@
     </section>
 
     <x-slot name="script">
-        <script src="{{ asset('dist/js/demo/chart-area-demo.js') }}"></script>
+        {{-- <script src="{{ asset('dist/js/demo/chart-area-demo.js') }}"></script> --}}
     </x-slot>
 </x-app-layout>

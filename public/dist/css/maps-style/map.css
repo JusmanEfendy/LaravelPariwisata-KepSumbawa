@@ -2,8 +2,8 @@
   height: 100%;
 }
 
-#map {
-  height: 500px;
+.maps {
+  height: 100% !important;
 }
 
 .bidang-label{
@@ -69,25 +69,25 @@
 
 }
 
-footer {
+.footer {
   background-color: #090945;
   border-top: 5px solid red;
   color: white;
 
 }
 
-footer a {
+.footer a {
   text-decoration: none;
   color: white;
   font-weight: bold;
   font-style: italic;
 }
 
-footer a:hover {
+.footer a:hover {
   color: red;
 }
 
-footer .footer-copyright {
+.footer .footer-copyright {
   color: grey;
 }
 
@@ -120,8 +120,14 @@ footer .footer-copyright {
       height: 85vh;
   }
 }
-@media screen and (min-width: 1300px) and (max-width: 1500px) {
+@media screen and (min-width: 1300px) {
   #map {
-      height:83vh;
+      height:80vh;
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  #map {
+      height:812px;
   }
 }

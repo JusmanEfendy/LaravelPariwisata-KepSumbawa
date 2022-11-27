@@ -12,7 +12,11 @@
         integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin="" />
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/css/map.css">
+    <link rel="stylesheet" href="{{ asset('dist/css/maps-style/leaflet-mouseposition.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/gokertanrisever/leaflet-ruler@master/src/leaflet-ruler.css"
+        integrity="sha384-P9DABSdtEY/XDbEInD3q+PlL+BjqPCXGcF8EkhtKSfSTr/dS5PBKa9+/PMkW2xsY" crossorigin="anonymous">
+    {{-- <link rel="stylesheet" href="{{ asset('dist/css/maps-style/leaflet-ruler.css') }}"> --}}
+    <link rel="stylesheet" href="{{ asset('dist/css/maps-style/map.css') }}">
 </head>
 
 <body>
@@ -41,10 +45,11 @@
                                 @endforeach
                             </ul>
                         </li>
-                        <select class="form-select" aria-label="Default select example">
+                        <select class="form-select" aria-label="Default select example"
+                            onchange="searchKab(this.value)">
                             <option selected>KABUPATEN</option>
                             @foreach ($kabupaten as $kab)
-                                <option value="{{ $kab->id }}">{{ $kab->nama }}</option>
+                                <option value="{{ $kab->nama }}">{{ $kab->nama }}</option>
                             @endforeach
                         </select>
                     </ul>
@@ -84,7 +89,7 @@
                 </div>
             </div>
         </div>
-        <footer class="page-footer blue">
+        <footer class="page-footer footer blue">
             <div class="footer-copyright text-center py-3">{{ $production }}
                 <a href="https://portfolio-jussy-tailwind.vercel.app/" target="_blank"> {{ $creator }}
             </div>
@@ -96,7 +101,14 @@
     </script>
     <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
         integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
-    <script src="/js/map.js"></script>
+    <script src="{{ asset('dist/js/maps-control/leaflet-hash.js') }}"></script>
+    <script src="{{ asset('dist/js/maps-control/leaflet-mouseposition.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/gh/gokertanrisever/leaflet-ruler@master/src/leaflet-ruler.js"
+        integrity="sha384-N2S8y7hRzXUPiepaSiUvBH1ZZ7Tc/ZfchhbPdvOE5v3aBBCIepq9l+dBJPFdo1ZJ" crossorigin="anonymous">
+    </script>
+    {{-- <script src="{{ asset('dist/js/maps-control/leaflet-ruler.js') }}"></script> --}}
+    <script src="{{ asset('dist/js/maps-control/map.js') }}"></script>
+
 </body>
 
 </html>

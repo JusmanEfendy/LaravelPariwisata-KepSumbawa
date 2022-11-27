@@ -81,6 +81,9 @@
                 <div class="col-md-6">
                     <x-textarea text="Deskripsi" name="deskripsi" rows="4" />
                 </div>
+                <div class="col-md-6">
+                    <div id="map" class="maps"></div>
+                </div>
             </div>
             <x-button type="primary" text="Tambah" for="submit" />
         </form>
