@@ -5,8 +5,6 @@ attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreet
 }).addTo(map);
 
 
-            
-
 // MARKER COSTUM ICONS
 let pantaiIcon = L.icon({
   iconUrl: '/icons/beach.png',
@@ -75,7 +73,7 @@ $(document).ready(function() {
                                   <div class="col-md">
                                       <ul class="list-group">
                                           <li class="list-group-item"><h4>${value.nama_wisata} (${value.nama_kategori})</h4></li>
-                                          <li class="list-group-item"><strong>Lokasi    : </strong>${value.nama_kelurahan} - ${value.nama_kabupaten}</li>
+                                          <li class="list-group-item"><strong>Lokasi    : </strong>${value.nama_kelurahan}, ${value.nama_kecamatan} - ${value.nama_kabupaten}</li>
                                           <li class="list-group-item"><strong>Koordinat : </strong>${value.lat}, ${value.lng}</li>
                                           <li class="list-group-item"><strong>Jam Buka  : </strong>00:00 - 00-00</li>
                                           <li class="list-group-item"><br> ${value.deskripsi}</li>
@@ -90,72 +88,10 @@ $(document).ready(function() {
   })
 });
 
-// POLYGON
-// $.getJSON('/geojson/kabupaten.geojson', function(data) {
-
-//   geoLayer = L.geoJson(data, {
-//     style: function(feature) {
-//       if (feature.properties.nama == "Bima") {
-//         return {
-//           fillOpacity: 0,
-//           weight: 4,
-//           opacity: 1,
-//           color:'yellow',
-//           dashArray: '10 7',
-//           lineCap: 'square'
-//         };
-//       }else if (feature.properties.nama == "Dompu") {
-//         return {
-//           fillOpacity: 0,
-//           weight: 4,
-//           opacity: 1,
-//           color:'red',
-//           dashArray: '10 7',
-//           lineCap: 'square'
-//         };
-//       }else if (feature.properties.nama == "Sumbawa") {
-//         return {
-//           fillOpacity: 0,
-//           weight: 4,
-//           opacity: 1,
-//           color:'blue',
-//           dashArray: '10 7',
-//           lineCap: 'square'
-//         };
-//       }else if (feature.properties.nama == "Sumbawa Barat") {
-//         return {
-//           fillOpacity: 0,
-//           weight: 4,
-//           opacity: 1,
-//           color:'purple',
-//           dashArray: '10 7',
-//           lineCap: 'square'
-//         };
-//       }else {"Kabupaten Tidak Di Temukan"}
-//     },  
-//     onEachFeature: function(feature, layer) {
-//       // console.log(feature)
-//       // console.log(layer)
-//       let divIcon = L.divIcon({
-//         className : 'bidang-label',
-//         html: `<b>${feature.properties.nama}</b>`,
-//         iconSize : [100,20],
-//       })
-//       L.marker(layer.getBounds().getCenter(),{icon: divIcon}).addTo(map)
-//       layer.addTo(map)
-//     }
-//   })
-// })
-
-
-// Polyline
-// $.getJSON('/geojson/polyline.geojson', function(value) {
-//   // console.log(value)
-// })
 
 // POLYGON PULAU SUMBAWA
 let geoLayer;
-$.getJSON('/geojson/kab-ksb.geojson', function(data) {
+$.getJSON('/geojson/perbatasan-antar-kabupaten.geojson', function(data) {
   geoLayer = L.geoJson(data, {
     style: function(feature) {
       if (feature.properties.nama == 'Sumbawa' || feature.properties.nama == 'pulau sbw') {
@@ -172,16 +108,34 @@ $.getJSON('/geojson/kab-ksb.geojson', function(data) {
           fillOpacity: 0,
           weight: 2,
           opacity: 1,
-          color:'red',
+          color:'#046604',
           // dashArray: '10 5',
           // lineCap: 'square'
         }
-      }
+      }else if (feature.properties.nama == 'Dompu' || feature.properties.nama == 'pulau dmp') {
+        return {
+          fillOpacity: 0,
+          weight: 2,
+          opacity: 1,
+          color:'#ad053a',
+          // dashArray: '10 5',
+          // lineCap: 'square'
+        }
+      }else if (feature.properties.nama == 'Bima' || feature.properties.nama == 'pulau bima') {
+        return {
+          fillOpacity: 0,
+          weight: 2,
+          opacity: 1,
+          color:'#212833',
+          // dashArray: '10 5',
+          // lineCap: 'square'
+        }
+      }else {"Kabupaten tidak ditemukan."}
     },  
     onEachFeature: function(feature, layer) {
       // console.log(feature)
       // console.log(layer)
-      if(feature.properties.nama !== 'Sumbawa' && feature.properties.nama !== 'Sumbawa Barat') {
+      if(feature.properties.nama !== 'Sumbawa' && feature.properties.nama !== 'Sumbawa Barat' && feature.properties.nama !== 'Dompu' && feature.properties.nama !== 'Bima') {
         let divIcon = L.divIcon({
           className : 'bidang-label',
           // html: `<b>${feature.properties.nama}</b>`,
@@ -209,9 +163,9 @@ var hash = new L.Hash(map);
 L.control.mousePosition().addTo(map);
 
 // event klik mendapatkan latlng
-const koordinat = () => map.on('click', function (e) {
-  alert(e.latlng)
-})
+// const koordinat = () => map.on('click', function (e) {
+//   alert(e.latlng)
+// })
 
 // DISTANCE / RULER
 var options = {
@@ -225,13 +179,21 @@ var options = {
 };
 L.control.ruler(options).addTo(map);
 
-// PENCARIAN FEATURE
+// PENCARIAN FEATURE (KABUPATEN)
 function searchKab (nama) {
+  // console.log(nama)
   geoLayer.eachLayer(function(feature){
     if(feature.feature.properties.nama == nama ) {
-      map.flyTo(feature.getBounds().getCenter(), 10)
+      map.flyTo(feature.getBounds().getCenter(), 11)
     }
   })
 }
 
+// PENCARIAN FEATURE (KATEGORI)
+function searchKat(nama) {
+  alert(nama)
+  return nama
+}
+
 // LAGEND
+ 
