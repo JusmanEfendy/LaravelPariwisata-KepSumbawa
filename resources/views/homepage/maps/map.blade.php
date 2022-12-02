@@ -33,18 +33,13 @@
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="/maps">HOME</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown"
-                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                KATEGORI WISATA
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                                @foreach ($kategori as $kat)
-                                    <li><a class="dropdown-item" href="/maps">{{ $kat->nama }}</a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </li>
+                        <select class="form-select" aria-label="Default select example"
+                            onchange="searchKat(this.value)">
+                            <option selected>KATEGORI</option>
+                            @foreach ($kategori as $kat)
+                                <option value="{{ $kat->nama }}">{{ $kat->nama }}</option>
+                            @endforeach
+                        </select>
                         <select class="form-select" aria-label="Default select example"
                             onchange="searchKab(this.value)">
                             <option selected>KABUPATEN</option>

@@ -43,8 +43,9 @@ class WisataController extends Controller
             'deskripsi' => 'required',
             'lat' => 'required',
             'lng' => 'required',
-            'link_sampul' => 'required',
+            'link_sampul' => 'required|image|file|max:2024',
         ]);
+        $request->file('link_sampul')->store('wisata_images');
         $input = $request->all();
         // dd($input);
         Wisata::create($input);
@@ -56,7 +57,7 @@ class WisataController extends Controller
     public function edit($id)
     {
         $wisata = Wisata::find($id);
-        $kel = Kelurahan::where('id', $wisata->id_kecamatan)->first();
+        $kel = Kelurahan::where('id', $wisata->id_kelurahan)->first();
         $kec = Kecamatan::where('id', $wisata->id_kecamatan)->first();
         $kab = Kabupaten::where('id', $wisata->id_kabupaten)->first();
         $kat = Kategori::where('id', $wisata->id_kategori)->first();
