@@ -27,40 +27,63 @@ let pulauIcon = L.icon({
 });
 
 let tamanIcon = L.icon({
-  iconUrl: '/icons/fish.png',
+  iconUrl: '/icons/taman.png',
   iconSize: [25, 30]
 });
 
 
 // MENGAMBIL DATA DARI DATABASE MENGGUNAKAN AJAX
 // MARKER DAN DETAIL WISATA MODAL
+let pantaiMarker = [];
+let pulauMarker = [];
+let tamanMarker = [];
+let gunungMarker = [];
+let bawahLautMarker = [];
 $(document).ready(function() {
-  // let datas = ''
   $.getJSON('/titik', function(data) {
-    // console.log(data)
       // Parsing semua data
       $.each(data, function(index, value) {
         // console.log('fungsi ini berjalan', value)
         if (value.nama_kategori == 'Pantai') {
-          new L.marker([parseFloat(value.lat), parseFloat(value.lng)], {
+          let marker = new L.marker([parseFloat(value.lat), parseFloat(value.lng)], {
             icon: pantaiIcon
-        }).on('click', markerOnClick).addTo(map)
+          }).on('click', markerOnClick).addTo(map)
+          pantaiMarker.push({
+            marker : marker,
+            koordinat : [parseFloat(value.lat), parseFloat(value.lng)]
+          })
         }else if (value.nama_kategori == 'Gunung') {
-          new L.marker([parseFloat(value.lat), parseFloat(value.lng)], {
+          let marker = new L.marker([parseFloat(value.lat), parseFloat(value.lng)], {
             icon: gunungIcon
         }).on('click', markerOnClick).addTo(map)
+        gunungMarker.push({
+          marker : marker,
+          koordinat : [parseFloat(value.lat), parseFloat(value.lng)]
+        })
         }else if(value.nama_kategori == 'Pulau') {
-          new L.marker([parseFloat(value.lat), parseFloat(value.lng)], {
+          let marker = new L.marker([parseFloat(value.lat), parseFloat(value.lng)], {
             icon: pulauIcon
         }).on('click', markerOnClick).addTo(map)
+        pulauMarker.push({
+          marker : marker,
+          koordinat : [parseFloat(value.lat), parseFloat(value.lng)]
+        })
         }else if(value.nama_kategori == 'Taman') {
-          new L.marker([parseFloat(value.lat), parseFloat(value.lng)], {
+          let marker = new L.marker([parseFloat(value.lat), parseFloat(value.lng)], {
             icon: tamanIcon
         }).on('click', markerOnClick).addTo(map)
+        tamanMarker.push({
+          marker : marker,
+          koordinat : [parseFloat(value.lat), parseFloat(value.lng)]
+        })
         }else if (value.nama_kategori == 'Bawah Laut') {
-          new L.marker([parseFloat(value.lat), parseFloat(value.lng)], {
+          let marker = new L.marker([parseFloat(value.lat), parseFloat(value.lng)], {
             icon: bawahLautIcon
         }).on('click', markerOnClick).addTo(map)
+        bawahLautMarker.push({
+          marker : marker,
+          koordinat : [parseFloat(value.lat), parseFloat(value.lng)]
+        })
         }      
             function markerOnClick() {
               $('#detailModal').modal('show')
@@ -68,7 +91,7 @@ $(document).ready(function() {
                 return `<div class="container-fluid">
                           <div class="row">
                               <div class="col-md-3">
-                                  <img src="https://source.unsplash.com/360x500?beach" class="img-fluid">
+                                  <img src="storage/wisata_images/${value.gambar}" class="img-fluid">
                               </div>
                                   <div class="col-md">
                                       <ul class="list-group">
@@ -89,7 +112,7 @@ $(document).ready(function() {
 });
 
 
-// POLYGON PULAU SUMBAWA
+// POLYGON KEPULAUAN SUMBAWA
 let geoLayer;
 $.getJSON('/geojson/perbatasan-antar-kabupaten.geojson', function(data) {
   geoLayer = L.geoJson(data, {
@@ -109,8 +132,6 @@ $.getJSON('/geojson/perbatasan-antar-kabupaten.geojson', function(data) {
           weight: 2,
           opacity: 1,
           color:'#046604',
-          // dashArray: '10 5',
-          // lineCap: 'square'
         }
       }else if (feature.properties.nama == 'Dompu' || feature.properties.nama == 'pulau dmp') {
         return {
@@ -118,8 +139,6 @@ $.getJSON('/geojson/perbatasan-antar-kabupaten.geojson', function(data) {
           weight: 2,
           opacity: 1,
           color:'#ad053a',
-          // dashArray: '10 5',
-          // lineCap: 'square'
         }
       }else if (feature.properties.nama == 'Bima' || feature.properties.nama == 'pulau bima') {
         return {
@@ -127,18 +146,13 @@ $.getJSON('/geojson/perbatasan-antar-kabupaten.geojson', function(data) {
           weight: 2,
           opacity: 1,
           color:'#212833',
-          // dashArray: '10 5',
-          // lineCap: 'square'
         }
       }else {"Kabupaten tidak ditemukan."}
     },  
     onEachFeature: function(feature, layer) {
-      // console.log(feature)
-      // console.log(layer)
       if(feature.properties.nama !== 'Sumbawa' && feature.properties.nama !== 'Sumbawa Barat' && feature.properties.nama !== 'Dompu' && feature.properties.nama !== 'Bima') {
         let divIcon = L.divIcon({
           className : 'bidang-label',
-          // html: `<b>${feature.properties.nama}</b>`,
           iconSize : [100,20],
         })
         L.marker(layer.getBounds().getCenter(),{icon: divIcon}).addTo(map)
@@ -162,10 +176,6 @@ var hash = new L.Hash(map);
 // MOUSE POSITION
 L.control.mousePosition().addTo(map);
 
-// event klik mendapatkan latlng
-// const koordinat = () => map.on('click', function (e) {
-//   alert(e.latlng)
-// })
 
 // DISTANCE / RULER
 var options = {
@@ -181,7 +191,6 @@ L.control.ruler(options).addTo(map);
 
 // PENCARIAN FEATURE (KABUPATEN)
 function searchKab (nama) {
-  // console.log(nama)
   geoLayer.eachLayer(function(feature){
     if(feature.feature.properties.nama == nama ) {
       map.flyTo(feature.getBounds().getCenter(), 11)
@@ -191,8 +200,96 @@ function searchKab (nama) {
 
 // PENCARIAN FEATURE (KATEGORI)
 function searchKat(nama) {
-  alert(nama)
-  return nama
+  for (let i = 0 ; i < gunungMarker.length ; i++) {
+    map.addLayer(gunungMarker[i].marker)
+  } 
+  for (let i = 0 ; i < tamanMarker.length ; i++) {
+    map.addLayer(tamanMarker[i].marker)
+  } 
+  for (let i = 0 ; i < bawahLautMarker.length ; i++) {
+    map.addLayer(bawahLautMarker[i].marker)
+  } 
+  for (let i = 0 ; i < pantaiMarker.length ; i++) {
+    map.addLayer(pantaiMarker[i].marker)
+  }
+  for (let i = 0 ; i < pulauMarker.length ; i++) {
+    map.addLayer(pulauMarker[i].marker)
+  }
+  
+  if(nama == 'Pulau') {
+    for (let i = 0 ; i < gunungMarker.length ; i++) {
+      map.removeLayer(gunungMarker[i].marker)
+    } 
+    for (let i = 0 ; i < tamanMarker.length ; i++) {
+      map.removeLayer(tamanMarker[i].marker)
+    } 
+    for (let i = 0 ; i < bawahLautMarker.length ; i++) {
+      map.removeLayer(bawahLautMarker[i].marker)
+    } 
+    for (let i = 0 ; i < pantaiMarker.length ; i++) {
+      map.removeLayer(pantaiMarker[i].marker)
+    } 
+  }
+
+  if(nama == 'Gunung') {
+    for (let i = 0 ; i < pantaiMarker.length ; i++) {
+      map.removeLayer(pantaiMarker[i].marker)
+    } 
+    for (let i = 0 ; i < tamanMarker.length ; i++) {
+      map.removeLayer(tamanMarker[i].marker)
+    } 
+    for (let i = 0 ; i < bawahLautMarker.length ; i++) {
+      map.removeLayer(bawahLautMarker[i].marker)
+    } 
+    for (let i = 0 ; i < pulauMarker.length ; i++) {
+      map.removeLayer(pulauMarker[i].marker)
+    } 
+  }
+
+  if(nama == 'Taman') {
+    for (let i = 0 ; i < pantaiMarker.length ; i++) {
+      map.removeLayer(pantaiMarker[i].marker)
+    } 
+    for (let i = 0 ; i < gunungMarker.length ; i++) {
+      map.removeLayer(gunungMarker[i].marker)
+    } 
+    for (let i = 0 ; i < bawahLautMarker.length ; i++) {
+      map.removeLayer(bawahLautMarker[i].marker)
+    } 
+    for (let i = 0 ; i < pulauMarker.length ; i++) {
+      map.removeLayer(pulauMarker[i].marker)
+    } 
+  }
+
+  if(nama == 'Bawah Laut') {
+    for (let i = 0 ; i < pantaiMarker.length ; i++) {
+      map.removeLayer(pantaiMarker[i].marker)
+    } 
+    for (let i = 0 ; i < tamanMarker.length ; i++) {
+      map.removeLayer(tamanMarker[i].marker)
+    } 
+    for (let i = 0 ; i < gunungMarker.length ; i++) {
+      map.removeLayer(gunungMarker[i].marker)
+    } 
+    for (let i = 0 ; i < pulauMarker.length ; i++) {
+      map.removeLayer(pulauMarker[i].marker)
+    } 
+  }
+
+  if(nama == 'Pantai') {
+    for (let i = 0 ; i < bawahLautMarker.length ; i++) {
+      map.removeLayer(bawahLautMarker[i].marker)
+    } 
+    for (let i = 0 ; i < tamanMarker.length ; i++) {
+      map.removeLayer(tamanMarker[i].marker)
+    } 
+    for (let i = 0 ; i < gunungMarker.length ; i++) {
+      map.removeLayer(gunungMarker[i].marker)
+    } 
+    for (let i = 0 ; i < pulauMarker.length ; i++) {
+      map.removeLayer(pulauMarker[i].marker)
+    } 
+  }
 }
 
 // LAGEND

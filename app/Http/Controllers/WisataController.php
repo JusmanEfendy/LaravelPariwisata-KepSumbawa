@@ -14,7 +14,6 @@ class WisataController extends Controller
     public function index()
     {
         $wisata = Wisata::with('kategori', 'kelurahan', 'kecamatan', 'kabupaten')->get()->sortBy('nama');
-        // dd($wisata);
         return view('admin.wisata.index', compact('wisata'));
     }
 
@@ -43,12 +42,22 @@ class WisataController extends Controller
             'deskripsi' => 'required',
             'lat' => 'required',
             'lng' => 'required',
-            'link_sampul' => 'required|image|file|max:2024',
+            'link_sampul' => 'image|max:2048',
         ]);
-        $request->file('link_sampul')->store('wisata_images');
-        $input = $request->all();
-        // dd($input);
-        Wisata::create($input);
+        $gambar = $request->file('link_sampul');
+        $gambar->storeAs('public/wisata_images', $gambar->hashName());
+        // $input = $request->all();
+        Wisata::create([
+            'nama' => $request->nama,
+            'id_kategori' => $request->id_kategori,
+            'id_kelurahan' => $request->id_kelurahan,
+            'id_kecamatan' => $request->id_kecamatan,
+            'id_kabupaten' => $request->id_kabupaten,
+            'deskripsi' => $request->deskripsi,
+            'lat' => $request->lat,
+            'lng' => $request->lng,
+            'link_sampul' => $gambar->hashName()
+        ]);
 
         return redirect()->route('admin.wisata')
             ->with('success', 'Wisata Berhasil Dibuat');
