@@ -48,10 +48,6 @@
                             @endforeach
                         </select>
                     </ul>
-                    {{-- <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Cari..." aria-label="Search">
-                        <button class="btn btn-outline-danger" type="submit">Cari</button>
-                    </form> --}}
                     <ul class="d-flex login">
                         <li><a href="{{ route('login') }}">LOGIN</a></li>
                     </ul>
