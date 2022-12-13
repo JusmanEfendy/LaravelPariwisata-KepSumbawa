@@ -64,7 +64,7 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <x-input text="Gambar Wisata" name="link_sampul" type="file" />
+                    <x-input text="Gambar Wisata" id="link_sampul" name="link_sampul" type="file" />
                 </div>
             </div>
             <div class="row">
@@ -96,7 +96,7 @@
                 maxZoom: 19,
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             }).addTo(map);
-            
+
             let newMarker;
             let old = {
                 lat: null,
@@ -111,7 +111,6 @@
                 old.lat = e.latlng.lat
                 old.lng = e.latlng.lng
                 newMarker = new L.marker(e.latlng).addTo(map)
-
             })
         </script>
     </x-slot>

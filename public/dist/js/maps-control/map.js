@@ -163,8 +163,7 @@ $.getJSON('/geojson/perbatasan-antar-kabupaten.geojson', function(data) {
         html: `<b>${feature.properties.nama}</b>`,
         iconSize : [100,20],
       })
-      L.marker(layer.getBounds().getCenter(),{icon: divIcon}).addTo(map)
-      layer.addTo(map)
+
       }     
     }
   })
@@ -293,4 +292,31 @@ function searchKat(nama) {
 }
 
 // LAGEND
- 
+let legend = L.control({position : 'topright'})
+
+legend.onAdd = function(map) {
+  let div = L.DomUtil.create('div', 'legend')
+  labels = ['<strong>Keterangan :</strong>'],
+  categories = ['Wisata Pantai', 'Wisata Pulau', 'Wisata Gunung', 'Wisata Bawah Laut', 'Wisata Taman']
+
+  for(let i = 0; i < categories.length; i++) {
+    if (i==0) {
+      div.innerHTML += labels.push("<img width='20' height=30 src='/icons/beach.png' ><i class='circle' style='background:white'", (categories[i] ? categories[i] : "+"))
+    }
+    if (i==1) {
+      div.innerHTML += labels.push("<img width='20' height=30 src='/icons/jangkar.png' ><i class='circle' style='background:white'", (categories[i] ? categories[i] : "+"))
+    }
+    if (i==2) {
+      div.innerHTML += labels.push("<img width='20' height=30 src='/icons/gunung.png' ><i class='circle' style='background:white'", (categories[i] ? categories[i] : "+"))
+    }
+    if (i==3) {
+      div.innerHTML += labels.push("<img width='20' height=30 src='/icons/fish.png' ><i class='circle' style='background:white'", (categories[i] ? categories[i] : "+"))
+    }
+    if (i==4) {
+      div.innerHTML += labels.push("<img width='20' height=30 src='/icons/taman.png' ><i class='circle' style='background:white'", (categories[i] ? categories[i] : "+"))
+    }
+  }
+  div.innerHTML = labels.join('<br>')
+  return div
+}
+legend.addTo(map);
