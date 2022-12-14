@@ -58,7 +58,7 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <x-input text="Link Gambar" name="link_sampul" type="text" value="{{ $wisata->link_sampul }}" />
+                    <x-input text="Gambar Wisata" name="link_sampul" type="file" />
                 </div>
             </div>
             <div class="row">

@@ -44,7 +44,7 @@
                             onchange="searchKab(this.value)">
                             <option selected>KABUPATEN</option>
                             @foreach ($kabupaten as $kab)
-                                <option value="{{ $kab->nama }}">{{ $kab->nama }}</option>
+                                <option value="{{ $kab->nama }}">kab. {{ $kab->nama }}</option>
                             @endforeach
                         </select>
                     </ul>
