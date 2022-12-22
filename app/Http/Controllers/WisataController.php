@@ -8,6 +8,7 @@ use App\Models\Kategori;
 use App\Models\Kecamatan;
 use App\Models\Kelurahan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class WisataController extends Controller
 {
@@ -86,23 +87,41 @@ class WisataController extends Controller
             'id_kecamatan' => 'required',
             'id_kabupaten' => 'required',
             'deskripsi' => 'required',
-            'link_sampul' => 'required',
+            'link_sampul' => 'image|max:2048',
             'lat' => 'required',
             'lng' => 'required'
         ]);
 
-        $input = $request->all();
-
+        // upload new image
         $wisata = Wisata::find($id);
-        $wisata->update($input);
+        $gambar = $request->file('link_sampul');
+        $gambar->storeAs('public/wisata_images', $gambar->hashName());
+
+        // delete old image
+        Storage::delete('wisata_images' . $wisata->link_sampul);
+        // $input = $request->all();
+        $wisata->update([
+            'nama' => $request->nama,
+            'id_kategori' => $request->id_kategori,
+            'id_kelurahan' => $request->id_kelurahan,
+            'id_kecamatan' => $request->id_kecamatan,
+            'id_kabupaten' => $request->id_kabupaten,
+            'deskripsi' => $request->deskripsi,
+            'lat' => $request->lat,
+            'lng' => $request->lng,
+            'link_sampul' => $gambar->hashName()
+        ]);
 
         return redirect()->route('admin.wisata')
             ->with('success', 'Wisata berhasil di perbarui');
     }
 
-    public function destroy($id)
+    public function destroy(Wisata $id)
     {
-        Wisata::find($id)->delete();
+        if ($id->link_sampul) {
+            Storage::delete('wisata_images' . $id->link_sampul);
+        }
+        Wisata::destroy($id->id);
         return redirect()->route('admin.wisata')
             ->with('success', 'Wisata berhasil dihapus');
     }

@@ -35,7 +35,7 @@
                         </li>
                         <select class="form-select" aria-label="Default select example"
                             onchange="searchKat(this.value)">
-                            <option selected>KATEGORI</option>
+                            <option selected>ALL KATEGORI</option>
                             @foreach ($kategori as $kat)
                                 <option value="{{ $kat->nama }}">{{ $kat->nama }}</option>
                             @endforeach
