@@ -89,7 +89,7 @@
     </script>
     <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
         integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
-    {{-- <script src="{{ asset('dist/js/maps-control/map.js') }}"></script> --}}
+    <script src="{{ asset('dist/js/maps-control/map.js') }}"></script>
     {{-- <script src="{{ asset('dist/js/maps-control/leaflet-hash.js') }}"></script> --}}
     <script></script>
     {{ $script ?? '' }}
