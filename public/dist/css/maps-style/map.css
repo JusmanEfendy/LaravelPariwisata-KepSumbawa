@@ -2,6 +2,10 @@
   height: 100%;
 }
 
+#route {
+  cursor: pointer;
+}
+
 .maps {
   height: 100% !important;
 }

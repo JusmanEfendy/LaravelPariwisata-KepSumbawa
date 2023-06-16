@@ -39,10 +39,15 @@ let pulauMarker = [];
 let tamanMarker = [];
 let gunungMarker = [];
 let bawahLautMarker = [];
+let routeLat = [];
+let routeLng = [];
 $(document).ready(function() {
   $.getJSON('/titik', function(data) {
       // Parsing semua data
       $.each(data, function(index, value) {
+        routeLat.push(value.lat)
+        routeLng.push(value.lng)
+
         // console.log('fungsi ini berjalan', value)
         if (value.nama_kategori == 'Pantai') {
           let marker = new L.marker([parseFloat(value.lat), parseFloat(value.lng)], {
@@ -84,7 +89,7 @@ $(document).ready(function() {
           marker : marker,
           koordinat : [parseFloat(value.lat), parseFloat(value.lng)]
         })
-        }      
+        }   
             function markerOnClick() {
               $('#detailModal').modal('show')
               function wisataDetail() {
@@ -293,7 +298,7 @@ function searchKat(nama) {
 }
 
 // LAGEND
-let legend = L.control({position : 'bottomright'})
+let legend = L.control({position : 'bottomleft'})
 
 legend.onAdd = function(map) {
   let div = L.DomUtil.create('div', 'legend')
@@ -322,4 +327,23 @@ legend.onAdd = function(map) {
 }
 legend.addTo(map);
 
-// hover marker
+// routing
+$(document).ready(function() {
+  $('#route').click(function() {
+    L.Routing.control({
+      waypoints: [
+        L.latLng(routeLat[0], routeLng[0]),
+        L.latLng(routeLat[1], routeLng[1])
+      ],
+      showAlternatives: true,
+      altLineOptions: {
+        styles: [
+          {color : 'black', opacity: .15, weight: 9},
+          {color : 'white', opacity: .9, weight: 6},
+          {color : 'blue', opacity: .5, weight: 2},
+        ]
+      },
+      geocoder: L.Control.Geocoder.nominatim()
+    }).addTo(map);
+  });
+});
