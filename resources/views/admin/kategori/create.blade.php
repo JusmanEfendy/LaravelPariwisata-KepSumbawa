@@ -8,14 +8,16 @@
         <x-alert type="success" message="{{ session()->get('success') }}" />
     @endif
     <x-card>
-        <form action="{{ route('admin.kategori.create') }}" method="post">
+        <form action="{{ route('admin.kategori.create') }}" method="post" enctype="multipart/form-data">
             @csrf
 
             <div class="row">
                 <div class="col-md-6">
                     <x-input text="Nama Kategori" name="nama" type="text" />
                 </div>
-
+                <div class="col-md-6">
+                    <x-input text="Icon Kategori" id="icon" name="icon" type="file" />
+                </div>
             </div>
 
             <x-button type="primary" text="Tambah" for="submit" />

@@ -52,6 +52,7 @@
     </section>
 
     <x-slot name="script">
+        <script src="{{ asset('dist/js/maps-control/map.js') }}"></script>
         {{-- <script src="{{ asset('dist/js/demo/chart-area-demo.js') }}"></script> --}}
     </x-slot>
 </x-app-layout>

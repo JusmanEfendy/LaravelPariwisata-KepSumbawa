@@ -16,7 +16,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/gokertanrisever/leaflet-ruler@master/src/leaflet-ruler.css"
         integrity="sha384-P9DABSdtEY/XDbEInD3q+PlL+BjqPCXGcF8EkhtKSfSTr/dS5PBKa9+/PMkW2xsY" crossorigin="anonymous">
     {{-- <link rel="stylesheet" href="{{ asset('dist/css/maps-style/leaflet-ruler.css') }}"> --}}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
     <link rel="stylesheet" href="{{ asset('dist/css/maps-style/map.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/maps-style/geocoder.css') }}">
 </head>
 
 <body>
@@ -32,6 +34,9 @@
                     <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="/maps">HOME</a>
+                        </li>
+                        <li class="nav-item">
+                            <div class="nav-link" aria-current="page" id="route">ROUTE</div>
                         </li>
                         <select class="form-select" aria-label="Default select example"
                             onchange="searchKat(this.value)">
@@ -57,11 +62,6 @@
         <div class="detail">
             <div id="map"></div>
         </div>
-
-        {{-- <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Launch demo modal
-        </button> --}}
 
         <!-- Modal -->
         <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -98,7 +98,9 @@
         integrity="sha384-N2S8y7hRzXUPiepaSiUvBH1ZZ7Tc/ZfchhbPdvOE5v3aBBCIepq9l+dBJPFdo1ZJ" crossorigin="anonymous">
     </script>
     {{-- <script src="{{ asset('dist/js/maps-control/leaflet-ruler.js') }}"></script> --}}
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
     <script src="{{ asset('dist/js/maps-control/map.js') }}"></script>
+    <script src="{{ asset('dist/js/maps-control/control.geocoder.js') }}"></script>
 
 </body>
 

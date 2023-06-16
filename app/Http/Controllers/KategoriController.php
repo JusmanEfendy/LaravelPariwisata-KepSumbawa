@@ -23,6 +23,7 @@ class KategoriController extends Controller
     {
         $this->validate($request, [
             'nama' => 'required'
+            // 'icons' => 'required'
         ]);
         $input = $request->all();
         Kategori::create($input);
