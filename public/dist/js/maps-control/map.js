@@ -16,7 +16,7 @@ let gunungIcon = L.icon({
   iconSize: [25, 30]
 });
 
-let bawahLautIcon = L.icon({
+let airTerjunIcon = L.icon({
   iconUrl: '/icons/fish.png',
   iconSize: [25, 30]
 });
@@ -38,7 +38,7 @@ let pantaiMarker = [];
 let pulauMarker = [];
 let tamanMarker = [];
 let gunungMarker = [];
-let bawahLautMarker = [];
+let airTerjunMarker = [];
 let routeLat = [];
 let routeLng = [];
 $(document).ready(function() {
@@ -81,11 +81,11 @@ $(document).ready(function() {
           marker : marker,
           koordinat : [parseFloat(value.lat), parseFloat(value.lng)]
         })
-        }else if (value.nama_kategori == 'Bawah Laut') {
+        }else if (value.nama_kategori == 'Air Terjun') {
           let marker = new L.marker([parseFloat(value.lat), parseFloat(value.lng)], {
-            icon: bawahLautIcon
+            icon: airTerjunIcon
         }).on('click', markerOnClick).addTo(map)
-        bawahLautMarker.push({
+        airTerjunMarker.push({
           marker : marker,
           koordinat : [parseFloat(value.lat), parseFloat(value.lng)]
         })
@@ -103,7 +103,7 @@ $(document).ready(function() {
                                           <li class="list-group-item"><h4>${value.nama_wisata} (${value.nama_kategori})</h4></li>
                                           <li class="list-group-item"><strong>Lokasi    : </strong>${value.nama_kelurahan}, ${value.nama_kecamatan} - ${value.nama_kabupaten}</li>
                                           <li class="list-group-item"><strong>Koordinat : </strong>${value.lat}, ${value.lng}</li>
-                                          <li class="list-group-item"><strong>Jam Buka  : </strong>00:00 - 00-00</li>
+                                          <li class="list-group-item"><strong>Jam Buka  : </strong>00:00 - 23:59</li>
                                           <li class="list-group-item"><br> ${value.deskripsi}</li>
                                       </ul>
                                   </div>
@@ -211,8 +211,8 @@ function searchKat(nama) {
   for (let i = 0 ; i < tamanMarker.length ; i++) {
     map.addLayer(tamanMarker[i].marker)
   } 
-  for (let i = 0 ; i < bawahLautMarker.length ; i++) {
-    map.addLayer(bawahLautMarker[i].marker)
+  for (let i = 0 ; i < airTerjunMarker.length ; i++) {
+    map.addLayer(airTerjunMarker[i].marker)
   } 
   for (let i = 0 ; i < pantaiMarker.length ; i++) {
     map.addLayer(pantaiMarker[i].marker)
@@ -228,8 +228,8 @@ function searchKat(nama) {
     for (let i = 0 ; i < tamanMarker.length ; i++) {
       map.removeLayer(tamanMarker[i].marker)
     } 
-    for (let i = 0 ; i < bawahLautMarker.length ; i++) {
-      map.removeLayer(bawahLautMarker[i].marker)
+    for (let i = 0 ; i < airTerjunMarker.length ; i++) {
+      map.removeLayer(airTerjunMarker[i].marker)
     } 
     for (let i = 0 ; i < pantaiMarker.length ; i++) {
       map.removeLayer(pantaiMarker[i].marker)
@@ -243,8 +243,8 @@ function searchKat(nama) {
     for (let i = 0 ; i < tamanMarker.length ; i++) {
       map.removeLayer(tamanMarker[i].marker)
     } 
-    for (let i = 0 ; i < bawahLautMarker.length ; i++) {
-      map.removeLayer(bawahLautMarker[i].marker)
+    for (let i = 0 ; i < airTerjunMarker.length ; i++) {
+      map.removeLayer(airTerjunMarker[i].marker)
     } 
     for (let i = 0 ; i < pulauMarker.length ; i++) {
       map.removeLayer(pulauMarker[i].marker)
@@ -258,15 +258,15 @@ function searchKat(nama) {
     for (let i = 0 ; i < gunungMarker.length ; i++) {
       map.removeLayer(gunungMarker[i].marker)
     } 
-    for (let i = 0 ; i < bawahLautMarker.length ; i++) {
-      map.removeLayer(bawahLautMarker[i].marker)
+    for (let i = 0 ; i < airTerjunMarker.length ; i++) {
+      map.removeLayer(airTerjunMarker[i].marker)
     } 
     for (let i = 0 ; i < pulauMarker.length ; i++) {
       map.removeLayer(pulauMarker[i].marker)
     } 
   }
 
-  if(nama == 'Bawah Laut') {
+  if(nama == 'Air Terjun') {
     for (let i = 0 ; i < pantaiMarker.length ; i++) {
       map.removeLayer(pantaiMarker[i].marker)
     } 
@@ -282,8 +282,8 @@ function searchKat(nama) {
   }
 
   if(nama == 'Pantai') {
-    for (let i = 0 ; i < bawahLautMarker.length ; i++) {
-      map.removeLayer(bawahLautMarker[i].marker)
+    for (let i = 0 ; i < airTerjunMarker.length ; i++) {
+      map.removeLayer(airTerjunMarker[i].marker)
     } 
     for (let i = 0 ; i < tamanMarker.length ; i++) {
       map.removeLayer(tamanMarker[i].marker)
@@ -303,7 +303,7 @@ let legend = L.control({position : 'bottomleft'})
 legend.onAdd = function(map) {
   let div = L.DomUtil.create('div', 'legend')
   labels = ['<strong>Keterangan :</strong>'],
-  categories = ['Wisata Pantai', 'Wisata Pulau', 'Wisata Gunung', 'Wisata Bawah Laut', 'Wisata Taman']
+  categories = ['Wisata Pantai', 'Wisata Pulau', 'Wisata Gunung', 'Wisata Air Terjun', 'Wisata Taman']
 
   for(let i = 0; i < categories.length; i++) {
     if (i==0) {
@@ -332,8 +332,8 @@ $(document).ready(function() {
   $('#route').click(function() {
     L.Routing.control({
       waypoints: [
-        L.latLng(routeLat[0], routeLng[0]),
-        L.latLng(routeLat[1], routeLng[1])
+        L.latLng(routeLat[6], routeLng[6]),
+        L.latLng(routeLat[7], routeLng[7])
       ],
       showAlternatives: true,
       altLineOptions: {
