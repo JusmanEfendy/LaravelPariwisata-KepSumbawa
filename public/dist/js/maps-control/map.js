@@ -96,7 +96,7 @@ $(document).ready(function() {
                 return `<div class="container-fluid">
                           <div class="row">
                               <div class="col-md-3">
-                                  <img src="storage/wisata_images/${value.gambar}" class="img-fluid">
+                                  <img src="storage/public/wisata_images/${value.gambar}" class="img-fluid">
                               </div>
                                   <div class="col-md">
                                       <ul class="list-group">
@@ -332,8 +332,8 @@ $(document).ready(function() {
   $('#route').click(function() {
     L.Routing.control({
       waypoints: [
-        L.latLng(routeLat[6], routeLng[6]),
-        L.latLng(routeLat[7], routeLng[7])
+        L.latLng(routeLat[0], routeLng[0]),
+        L.latLng(routeLat[1], routeLng[1])
       ],
       showAlternatives: true,
       altLineOptions: {

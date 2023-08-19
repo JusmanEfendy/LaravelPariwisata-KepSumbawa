@@ -15,9 +15,9 @@
                 <div class="col-md-6">
                     <x-input text="Nama Kategori" name="nama" type="text" />
                 </div>
-                <div class="col-md-6">
-                    <x-input text="Icon Kategori" id="icon" name="icon" type="file" />
-                </div>
+                <!-- <div class="col-md-6">
+                    <x-input text="Icon Kategori" id="icon" name="icon" type="hidden" />
+                </div> -->
             </div>
 
             <x-button type="primary" text="Tambah" for="submit" />
