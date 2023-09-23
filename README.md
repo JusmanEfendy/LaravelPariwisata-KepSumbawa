@@ -1,7 +1,8 @@
 # JussyXQAdmin
-a free, open-source dashboard panel starter kit for Laravel. Just intall and everything is ready
+created by jussy with the help of the QAdmin template as the admin menu provider
 
-![App Screenshot](https://github.com/superXdev/QAdmin/blob/main/public/dist/img/screenshot/ss.png?raw=true)
+<img width="946" alt="dashboard" src="https://github.com/JusmanEfendy/LaravelPariwisata-KepSumbawa/assets/92988781/7d04b750-a37a-477e-acd6-22be5e199ce4">
+
 
   
 
@@ -42,12 +43,13 @@ cd QAdmin
 composer install
 cp .env.example .env <-- edit db config
 php artisan admin:install
+php artisan db:seed --class=CreateKategoriSeeder
 ```
 That's it!
 
 ## Admin credentials
-- **Email:** admin@gmail.com
-- **Password:** admin123
+- **Email:** jussy@gmail.com
+- **Password:** jussy
 
 ## Running Tests
 
