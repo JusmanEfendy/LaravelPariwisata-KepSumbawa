@@ -3,17 +3,17 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{DashboardController, KategoriController, UserController, RoleController, KabupatenController, WisataController, KecamatanController, KelurahanController, MapsController};
 
-Route::get('/', function () {
-	return view('welcome');
-});
+// Route::get('/', function () {
+// 	return view('welcome');
+// });
 
-Route::get('/maps', [MapsController::class, 'index'])->name('maps');
+Route::get('/', [MapsController::class, 'index'])->name('maps');
 Route::get('/titik', [MapsController::class, 'titik'])->name('titik');
 Route::get('/titik/{id}', [MapsController::class, 'titik'])->name('titik');
 
 
 Route::group([
-	'middleware' => 'auth',
+	'middleware' => ['auth'],
 	'prefix' => 'admin',
 	'as' => 'admin.'
 ], function () {

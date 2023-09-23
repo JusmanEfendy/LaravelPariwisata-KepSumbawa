@@ -19,12 +19,39 @@ class PermissionTableSeeder extends Seeder
            'role-create',
            'role-edit',
            'role-delete',
+
            'member-list',
            'member-create',
            'member-edit',
            'member-delete',
+
            'setting-list',
-           'setting-edit'
+           'setting-edit',
+           
+           'kategori-list',
+           'kategori-create',
+           'kategori-edit',
+           'kategori-delete',
+
+           'wisata-list',
+           'wisata-create',
+           'wisata-edit',
+           'wisata-delete',
+
+           'kabupaten-list',
+           'kabupaten-create',
+           'kabupaten-edit',
+           'kabupaten-delete',
+
+           'kecamatan-list',
+           'kecamatan-create',
+           'kecamatan-edit',
+           'kecamatan-delete',
+
+           'kelurahan-list',
+           'kelurahan-create',
+           'kelurahan-edit',
+           'kelurahan-delete',
         ];
      
         foreach ($permissions as $permission) {

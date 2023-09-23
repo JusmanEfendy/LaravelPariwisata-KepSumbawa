@@ -55,6 +55,7 @@ class WisataController extends Controller
             'id_kecamatan' => $request->id_kecamatan,
             'id_kabupaten' => $request->id_kabupaten,
             'deskripsi' => $request->deskripsi,
+            'fasilitas' => $request->fasilitas,
             'lat' => $request->lat,
             'lng' => $request->lng,
             'link_sampul' => $gambar->hashName()

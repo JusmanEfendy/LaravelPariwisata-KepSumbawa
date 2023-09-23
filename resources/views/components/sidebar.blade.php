@@ -12,38 +12,38 @@
 
     <hr class="sidebar-divider mb-0">
 
-    @can('member-list')
+    {{-- @can('member-list')
         <x-nav-link text="Admin" icon="male" url="{{ route('admin.member') }}"
             active="{{ request()->routeIs('admin.member') ? ' active' : '' }}" />
-    @endcan
+    @endcan --}}
 
     @can('member-list')
         <x-nav-link text="User" icon="users" url="{{ route('admin.member') }}"
             active="{{ request()->routeIs('admin.member') ? ' active' : '' }}" />
     @endcan
 
-    @can('member-list')
-        <x-nav-link text="Kategori Wisata" icon="archive" url="{{ route('admin.kategori') }}"
+    @can('kategori-list')
+        <x-nav-link text="Kategori" icon="archive" url="{{ route('admin.kategori') }}"
             active="{{ request()->routeIs('admin.kategori') ? ' active' : '' }}" />
     @endcan
 
-    @can('member-list')
+    @can('wisata-list')
         <x-nav-link text="Wisata" icon="compass" url="{{ route('admin.wisata') }}"
             active="{{ request()->routeIs('admin.wisata') ? ' active' : '' }}" />
     @endcan
 
-    @can('member-list')
-        <x-nav-link text="Data Kabupaten" icon="hospital" url="{{ route('admin.kabupaten') }}"
+    @can('kabupaten-list')
+        <x-nav-link text="Kabupaten" icon="hospital" url="{{ route('admin.kabupaten') }}"
             active="{{ request()->routeIs('admin.kabupaten') ? ' active' : '' }}" />
     @endcan
 
-    @can('member-list')
-        <x-nav-link text="Data Kecamatan" icon="road" url="{{ route('admin.kecamatan') }}"
+    @can('kecamatan-list')
+        <x-nav-link text="Kecamatan" icon="road" url="{{ route('admin.kecamatan') }}"
             active="{{ request()->routeIs('admin.kecamatan') ? ' active' : '' }}" />
     @endcan
 
-    @can('member-list')
-        <x-nav-link text="Data Kelurahan" icon="anchor" url="{{ route('admin.kelurahan') }}"
+    @can('kelurahan-list')
+        <x-nav-link text="Kelurahan" icon="anchor" url="{{ route('admin.kelurahan') }}"
             active="{{ request()->routeIs('admin.kelurahan') ? ' active' : '' }}" />
     @endcan
 

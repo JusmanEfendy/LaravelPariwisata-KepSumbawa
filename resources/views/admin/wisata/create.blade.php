@@ -86,6 +86,11 @@
                     <div id="map" class="maps"></div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <x-textarea text="Fasilitas" name="fasilitas" rows="4" />
+                </div>
+            </div>
             <x-button type="primary" text="Tambah" for="submit" />
         </form>
     </x-card>

@@ -103,6 +103,7 @@ $(document).ready(function() {
                                           <li class="list-group-item"><h4>${value.nama_wisata} (${value.nama_kategori})</h4></li>
                                           <li class="list-group-item"><strong>Lokasi    : </strong>${value.nama_kelurahan}, ${value.nama_kecamatan} - ${value.nama_kabupaten}</li>
                                           <li class="list-group-item"><strong>Koordinat : </strong>${value.lat}, ${value.lng}</li>
+                                          <li class="list-group-item"><strong>Fasilitas : </strong>Jajanan Setempat</li>
                                           <li class="list-group-item"><strong>Jam Buka  : </strong>00:00 - 23:59</li>
                                           <li class="list-group-item"><br> ${value.deskripsi}</li>
                                       </ul>

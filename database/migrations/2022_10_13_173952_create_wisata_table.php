@@ -21,6 +21,7 @@ class CreateWisataTable extends Migration
             $table->bigInteger('id_kecamatan')->unsigned();
             $table->bigInteger('id_kabupaten')->unsigned();
             $table->text('deskripsi');
+            $table->text('fasilitas')->nullable();
             $table->text('link_sampul')->nullable();
             $table->string('lat');
             $table->string('lng');
