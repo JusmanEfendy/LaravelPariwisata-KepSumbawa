@@ -43,12 +43,14 @@ cd QAdmin
 composer install
 cp .env.example .env <-- edit db config
 php artisan admin:install
+php artisan db:seed --class=CreateKategoriSeeder
+
 ```
 That's it!
 
 ## Admin credentials
-- **Email:** admin@gmail.com
-- **Password:** admin123
+- **Email:** jussy@gmail.com
+- **Password:** jussy
 
 ## Running Tests
 
