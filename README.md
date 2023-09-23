@@ -44,7 +44,6 @@ composer install
 cp .env.example .env <-- edit db config
 php artisan admin:install
 php artisan db:seed --class=CreateKategoriSeeder
-
 ```
 That's it!
 
