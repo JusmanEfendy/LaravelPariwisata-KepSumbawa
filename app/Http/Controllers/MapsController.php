@@ -22,11 +22,12 @@ class MapsController extends Controller
 
     public function index()
     {
+        $year = date('Y');
         $kategori = Kategori::all()->sortBy('nama');
         $kabupaten = Kabupaten::all()->sortBy('nama');
         $creator = 'JussyCheta';
         $title = 'PARIWISATA | KepSumbawa';
-        $production = '© 2022 Copyright:';
+        $production = "© $year Copyright:";
         return view('homepage.maps.map', compact('kategori', 'title', 'production', 'creator', 'kabupaten'));
     }
     // function merubah ke json

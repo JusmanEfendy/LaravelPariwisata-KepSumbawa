@@ -79,6 +79,11 @@
                     <label for="map">Click map for to get latitude and longitude</label>
                     <div id="map" class="maps"></div>
                 </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <x-textarea text="Fasilitas" name="fasilitas" rows="4" />
+                    </div>
+                </div>
             </div>
             <x-button type="primary" text="Ubah" for="submit" />
         </form>
