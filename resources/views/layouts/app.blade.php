@@ -20,13 +20,6 @@
     <link href="{{ asset('dist/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('dist/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('dist/css/ruang-admin.min.css') }}" rel="stylesheet">
-    <style>
-        .maps {
-            height: 100% !important;
-            cursor: pointer;
-        }
-    </style>
-    {{-- <link href="{{ asset('dist/css/map-style/leaflet-hash.js') }}" rel="stylesheet"> --}}
     {{ $head ?? '' }}
 </head>
 
@@ -90,7 +83,6 @@
     </script>
     <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
         integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
-    {{-- <script src="{{ asset('dist/js/maps-control/leaflet-hash.js') }}"></script> --}}
     <script></script>
     {{ $script ?? '' }}
 </body>

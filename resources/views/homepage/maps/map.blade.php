@@ -2,9 +2,12 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Pariwisata Kepulauan Sumbawa">
+    <meta name="author" content="Jussman Effendy">
+    <meta name="keywords" content="pariwisata,sumbawa,kepulauan,kepulauan sumbawa,wisata sumbawa,wisata">
     <title>{{ $title }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
@@ -75,6 +78,7 @@
 
                     </div>
                     <div class="modal-footer">
+                        <button type="button" class="btnRute btn btn-primary justify-start">Rute</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
@@ -82,7 +86,7 @@
         </div>
         <footer class="page-footer footer blue">
             <div class="footer-copyright text-center py-3">{{ $production }}
-                <a href="https://portfolio-jussy-tailwind.vercel.app/" target="_blank"> {{ $creator }}
+                <a href="https://portfolio-react-jussy.vercel.app/" target="_blank"> {{ $creator }}
             </div>
         </footer>
     </div>
@@ -101,7 +105,6 @@
     <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
     <script src="{{ asset('dist/js/maps-control/map.js') }}"></script>
     <script src="{{ asset('dist/js/maps-control/control.geocoder.js') }}"></script>
-
 </body>
 
 </html>
