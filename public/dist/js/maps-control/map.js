@@ -410,7 +410,7 @@ $(document).ready(function () {
         }
         function showPosition(position) {
             if (!requestRouting) {
-                var waypoints = [];
+                let waypoints = [];
 
                 // Tambahkan lokasi saat ini sebagai waypoint pertama
                 waypoints.push(
@@ -436,6 +436,13 @@ $(document).ready(function () {
                         ],
                     },
                     geocoder: L.Control.Geocoder.nominatim(),
+                    router: L.Routing.osrmv1({
+                        // Menggunakan penyedia layanan OSRM
+                        serviceUrl: 'http://router.project-osrm.org/route/v1',
+                        routingOptions: {
+                            algorithm: "dijkstrabi", // Menggunakan algoritma Dijkstra
+                        },
+                    }),
                 }).addTo(map);
 
                 requestRouting = true;
@@ -472,6 +479,13 @@ $(document).on("click", ".btnRute", function () {
                     ],
                 },
                 geocoder: L.Control.Geocoder.nominatim(),
+                router: L.Routing.osrmv1({
+                    // Menggunakan penyedia layanan OSRM
+                    serviceUrl: 'http://router.project-osrm.org/route/v1',
+                    routingOptions: {
+                        algorithm: "dijkstrabi", // Menggunakan algoritma Dijkstra
+                    },
+                }),
             }).addTo(map);
 
             hasRequestedModal = true;
