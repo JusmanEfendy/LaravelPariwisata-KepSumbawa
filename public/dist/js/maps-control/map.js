@@ -234,16 +234,16 @@ var hash = new L.Hash(map);
 L.control.mousePosition().addTo(map);
 
 // DISTANCE / RULER
-var options = {
-    position: "topleft",
-    lengthUnit: {
-        factor: null, //  from km to nm
-        display: "km",
-        decimal: 2,
-        label: "jarak/km:",
-    },
-};
-L.control.ruler(options).addTo(map);
+// var options = {
+//     position: "topleft",
+//     lengthUnit: {
+//         factor: null, //  from km to nm
+//         display: "km",
+//         decimal: 2,
+//         label: "jarak/km:",
+//     },
+// };
+// L.control.ruler(options).addTo(map);
 
 // PENCARIAN FEATURE (KABUPATEN)
 function searchKab(nama) {
