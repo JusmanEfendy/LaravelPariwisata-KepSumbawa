@@ -5,9 +5,9 @@
 
     <section class="row">
         <x-card-sum text="Total Wisata" value="{{ count($wisata) }}" icon="users" color="warning" />
+        <x-card-sum text="Total Kategori Wisata" value="{{ count($kategori) }}" icon="money-bill" color="success" />
         <x-card-sum text="Total Kelurahan" value="{{ count($kelurahan) }}" icon="chart-line" color="primary" />
-        <x-card-sum text="Income" value="$1200" icon="money-bill" color="success" />
-        <x-card-sum text="Total Product" value="42" icon="box" color="danger" />
+        <x-card-sum text="Total Kecamatan" value="{{ count($kecamatan) }}" icon="box" color="danger" />
     </section>
 
     <section class="row">

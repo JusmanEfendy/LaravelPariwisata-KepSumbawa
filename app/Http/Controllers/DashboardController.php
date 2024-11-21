@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Activitylog\Models\Activity;
 use App\Http\Requests\SettingRequest;
+use App\Models\Kategori;
 use App\Models\Kelurahan;
+use App\Models\Kecamatan;
 use Carbon\Carbon;
 use App\Models\Wisata;
 
@@ -21,9 +23,11 @@ class DashboardController extends Controller
     {
         $logs = Activity::where('causer_id', auth()->id())->latest()->paginate(5);
         $wisata = Wisata::get()->all();
+        $kategori = Kategori::get()->all();
         $kelurahan = Kelurahan::get()->all();
+        $kecamatan = Kecamatan::get()->all();
 
-        return view('admin.dashboard', compact('logs', 'wisata', 'kelurahan'));
+        return view('admin.dashboard', compact('logs', 'wisata', 'kelurahan', 'kategori', 'kecamatan'));
     }
 
     /**
