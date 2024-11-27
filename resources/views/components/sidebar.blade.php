@@ -52,6 +52,17 @@
             active="{{ request()->routeIs('admin.roles') ? ' active' : '' }}" />
     @endcan
 
+    @can('permintaan-wisata-list')
+        <x-nav-link text="Verifikasi Wisata" icon="th-list" url="{{ route('admin.permintaan-wisata') }}"
+            active="{{ request()->routeIs('admin.permintaan-wisata') ? ' active' : '' }}" />
+    @endcan
+
+    {{-- masih butuh perbaikan --}}
+    @if(auth()->user()->roles->first()->name == 'Wisatawan')
+    <x-nav-link text="Tambahkan Wisata" icon="th-list" url="{{ route('admin.tambahkan-wisata') }}"
+        active="{{ request()->routeIs('admin.tambahkan-wisata') ? ' active' : '' }}" />
+    @endif
+
     <hr class="sidebar-divider mb-0">
 
     @can('setting-list')

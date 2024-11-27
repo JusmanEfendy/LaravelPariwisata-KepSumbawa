@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{DashboardController, KategoriController, UserController, RoleController, KabupatenController, WisataController, KecamatanController, KelurahanController, MapsController};
+use App\Http\Controllers\{DashboardController, KategoriController, UserController, RoleController, KabupatenController, WisataController, KecamatanController, KelurahanController, MapsController, TambahkanWisata, WisataApproveController};
 
 // Route::get('/', function () {
 // 	return view('welcome');
@@ -87,6 +87,14 @@ Route::group([
 	Route::get('/kelurahan/{id}/edit', [KelurahanController::class, 'edit'])->name('kelurahan.edit');
 	Route::post('/kelurahan/{id}/update', [KelurahanController::class, 'update'])->name('kelurahan.update');
 	Route::post('/kelurahan/{id}/delete', [KelurahanController::class, 'destroy'])->name('kelurahan.delete');
+
+    // Permintaan Wisata (ADMIN)
+    Route::get('/permintaan-wisata', [WisataApproveController::class, 'index'])->name('permintaan-wisata');
+
+    // Permintaan Tambah Wisata (WISATAWAN)
+    Route::get('/Tambahkan-wisata', [TambahkanWisata::class, 'index'])->name('tambahkan-wisata');
+    Route::get('/tambahkan-wisata-baru', [TambahkanWisata::class, 'create'])->name('wisata-baru.create');
+    Route::post('/tambahkan-wisata-baru', [TambahkanWisata::class, 'store'])->name('wisata-baru.create');
 });
 
 

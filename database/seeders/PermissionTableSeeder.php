@@ -1,10 +1,10 @@
 <?php
-  
+
 namespace Database\Seeders;
-  
+
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
-  
+
 class PermissionTableSeeder extends Seeder
 {
     /**
@@ -27,7 +27,7 @@ class PermissionTableSeeder extends Seeder
 
            'setting-list',
            'setting-edit',
-           
+
            'kategori-list',
            'kategori-create',
            'kategori-edit',
@@ -52,8 +52,10 @@ class PermissionTableSeeder extends Seeder
            'kelurahan-create',
            'kelurahan-edit',
            'kelurahan-delete',
+
+           'permintaan-wisata-list',
         ];
-     
+
         foreach ($permissions as $permission) {
              Permission::create(['name' => $permission]);
         }

@@ -48,7 +48,7 @@ class WisataController extends Controller
         ]);
         $gambar = $request->file('link_sampul');
         $gambar->storeAs('public/wisata_images', $gambar->hashName());
-        // $input = $request->all();
+
         Wisata::create([
             'nama' => $request->nama,
             'id_kategori' => $request->id_kategori,
