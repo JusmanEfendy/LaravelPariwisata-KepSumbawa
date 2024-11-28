@@ -9,7 +9,7 @@
         <x-slot name="option">
             <a href="{{ route('admin.wisata-baru.create') }}" class="btn btn-success">
                 <i class="fas fa-plus"></i>
-            </a>
+            Ajukan Wisata</a>
         </x-slot>
         <table class="table table-bordered">
             <thead>

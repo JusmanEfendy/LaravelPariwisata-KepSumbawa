@@ -1,48 +1,41 @@
 <x-app-layout>
-    <x-slot name="title">Wisata</x-slot>
+    <x-slot name="title">Pengajuan Wisata</x-slot>
 
     @if (session()->has('success'))
         <x-alert type="success" message="{{ session()->get('success') }}" />
     @endif
     <x-card>
-        <x-slot name="title">List Data Wisata</x-slot>
+        <x-slot name="title">Verifikasi Pengajuan Wisata</x-slot>
         <x-slot name="option">
-            <a href="{{ route('admin.wisata.create') }}" class="btn btn-success">
-                <i class="fas fa-plus"></i>
-            </a>
+            <a href="{{ route('admin.data-pengajuan') }}" class="btn btn-primary">Semua Data Pengajuan</a>
         </x-slot>
         <table class="table table-bordered">
             <thead>
-                <th>Wisata</th>
-                <th>Kelurahan</th>
-                <th>Kecamatan</th>
-                <th>Kabupaten</th>
-                <th>Action</th>
+                <th>Nama Wisata</th>
+                <th>Kategori</th>
+                <th>Lokasi</th>
+                <th >Info Detail</th>
+                <th class="text-center">Verifikasi</th>
             </thead>
             <tbody>
                 @forelse($wisataApprove as $wis)
                     <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>{{ $wis->nama }}</td>
+                        <td>{{ $wis->kategori->nama }}</td>
+                        <td>{{ $wis->kelurahan->nama }}, {{ $wis->kecamatan->nama }}, {{ $wis->kabupaten->nama }}</td>
                         <td class="text-center">
-                            <button type="button" class="btn btn-info mr-1 info" data-nama=""
-                                data-created=""
-                                data-lng=""
-                                data-deskripsi="" data-kategori=""
-                                data-gambar=""
-                                data-lokasi="">
+                            <button type="button" class="btn btn-info mr-1 info" data-nama="{{ $wis->nama }}"
+                                data-maker="{{ $wis->user->name }}, ({{ $wis->created_at }})"
+                                data-lng="{{ $wis->lng }}" data-lat="{{ $wis->lat }}"
+                                data-deskripsi="{{ $wis->deskripsi }}" data-kategori="{{ $wis->kategori->nama }}"
+                                data-fasilitas="{{ $wis->fasilitas }}"
+                                data-lokasi="{{ $wis->kelurahan->nama }}, {{ $wis->kecamatan->nama }}, {{ $wis->kabupaten->nama }}">
                                 <i class="fas fa-eye"></i>
-                            </button>
-                            <a href="" class="btn btn-primary mr-1"><i
-                                    class="fas fa-edit"></i></a>
-                            <form action="" style="display: inline-block;"
-                                method="POST">
-                                @csrf
-                                <button type="button" class="btn btn-danger delete"><i
-                                        class="fas fa-trash"></i></button>
-                            </form>
+                            Detail</button>
+                        </td>
+                        <td class="text-center">
+                            <a href="{{ route('admin.pengajuan-wisata.approve', $wis->id) }}" class="btn btn-success">Setuju</a>
+                            <a href="{{ route('admin.pengajuan-wisata.reject', $wis->id) }}" class="btn btn-danger">Tolak</a>
                         </td>
                     </tr>
                 @empty
@@ -55,7 +48,7 @@
     </x-card>
     <x-modal>
         <x-slot name="id">infoModal</x-slot>
-        <x-slot name="title">Information</x-slot>
+        <x-slot name="title">Informasi Detail</x-slot>
         <div class="row mb-2">
             <div class="col-6">
                 <b>KATEGORI</b>
@@ -93,13 +86,6 @@
 
         <div class="row mb-2">
             <div class="col-6">
-                <b>Link Gambar</b>
-            </div>
-            <div class="col-6" id="gambar-modal"></div>
-        </div>
-
-        <div class="row mb-2">
-            <div class="col-6">
                 <b>Deskripsi</b>
             </div>
             <div class="col-6" id="desk-modal"></div>
@@ -107,9 +93,16 @@
 
         <div class="row mb-2">
             <div class="col-6">
-                <b>Dibuat pada</b>
+                <b>Fasilitas</b>
             </div>
-            <div class="col-6" id="created-modal"></div>
+            <div class="col-6" id="fasilitas-modal"></div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-6">
+                <b>Diajukan Oleh</b>
+            </div>
+            <div class="col-6" id="maker-modal"></div>
         </div>
     </x-modal>
 
@@ -130,9 +123,9 @@
 
                 $('#kategori-modal').text($(this).data('kategori'))
 
-                $('#gambar-modal').text($(this).data('gambar'))
+                $('#fasilitas-modal').text($(this).data('fasilitas'))
 
-                $('#created-modal').text($(this).data('created'))
+                $('#maker-modal').text($(this).data('maker'))
 
                 $('#infoModal').modal('show')
             })

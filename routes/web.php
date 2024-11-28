@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{DashboardController, KategoriController, UserController, RoleController, KabupatenController, WisataController, KecamatanController, KelurahanController, MapsController, TambahkanWisata, WisataApproveController};
+use App\Models\WisataApprove;
 
 // Route::get('/', function () {
 // 	return view('welcome');
@@ -90,6 +91,9 @@ Route::group([
 
     // Permintaan Wisata (ADMIN)
     Route::get('/permintaan-wisata', [WisataApproveController::class, 'index'])->name('permintaan-wisata');
+    Route::get('data-pengajuan', [WisataApproveController::class, 'dataPengajuan'])->name('data-pengajuan');
+    Route::get('pengajuan-wisata/approve/{id}', [WisataApproveController::class, 'approve'])->name('pengajuan-wisata.approve');
+    Route::get('pengajuan-wisata/reject/{id}', [WisataApproveController::class, 'reject'])->name('pengajuan-wisata.reject');
 
     // Permintaan Tambah Wisata (WISATAWAN)
     Route::get('/Tambahkan-wisata', [TambahkanWisata::class, 'index'])->name('tambahkan-wisata');
