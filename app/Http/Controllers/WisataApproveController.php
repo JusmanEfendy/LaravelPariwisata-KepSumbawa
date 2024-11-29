@@ -17,7 +17,9 @@ class WisataApproveController extends Controller
 
     public function dataPengajuan()
     {
-        dd('test');
+        $dataPengajuanDisetujui = WisataApprove::where('status', 'approved')->orderBy('nama', 'asc')->paginate(5);
+        $dataPengajuanDitolak = WisataApprove::where('status', 'rejected')->orderBy('nama', 'asc')->paginate(5);
+        return view('admin.permintaan-wisata.dataPengajuan', compact('dataPengajuanDisetujui', 'dataPengajuanDitolak'));
     }
 
     public function approve($id)

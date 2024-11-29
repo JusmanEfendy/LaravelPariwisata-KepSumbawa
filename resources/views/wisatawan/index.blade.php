@@ -38,7 +38,7 @@
                                 data-maker="{{ $wis->user->name }}, ({{ $wis->created_at }})"
                                 data-lng="{{ $wis->lng }}" data-lat="{{ $wis->lat }}"
                                 data-deskripsi="{{ $wis->deskripsi }}" data-kategori="{{ $wis->kategori->nama }}"
-                                data-status="{{ $wis->status }}"
+                                data-status="{{ $wis->status }}" data-fasilitas="{{ $wis->fasilitas }}"
                                 data-lokasi="{{ $wis->kelurahan->nama }}, {{ $wis->kecamatan->nama }}, {{ $wis->kabupaten->nama }}">
                                 <i class="fas fa-eye"></i>
                             Detail</button>
@@ -99,6 +99,13 @@
 
         <div class="row mb-2">
             <div class="col-6">
+                <b>Fasilitas</b>
+            </div>
+            <div class="col-6" id="fasilitas-modal"></div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-6">
                 <b>Status Pengajuan</b>
             </div>
             <div class="col-6" id="status-modal"></div>
@@ -128,6 +135,8 @@
                 $('#desk-modal').text($(this).data('deskripsi'))
 
                 $('#kategori-modal').text($(this).data('kategori'))
+
+                $('#fasilitas-modal').text($(this).data('fasilitas'))
 
                 $('#status-modal').text($(this).data('status'))
 

@@ -1,11 +1,11 @@
 <x-app-layout>
-    <x-slot name="title">Pengajuan Wisata</x-slot>
+    <x-slot name="title">Verifikasi Pengajuan Wisata</x-slot>
 
     @if (session()->has('success'))
         <x-alert type="success" message="{{ session()->get('success') }}" />
     @endif
     <x-card>
-        <x-slot name="title">Verifikasi Pengajuan Wisata</x-slot>
+        <x-slot name="title">Menunggu Persetujuan Wisata ...</x-slot>
         <x-slot name="option">
             <a href="{{ route('admin.data-pengajuan') }}" class="btn btn-primary">Semua Data Pengajuan</a>
         </x-slot>
