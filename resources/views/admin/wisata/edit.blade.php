@@ -81,7 +81,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <x-textarea text="Fasilitas" name="fasilitas" rows="4" />
+                        <x-textarea text="Fasilitas" name="fasilitas" rows="4" value="{{ $wisata->fasilitas }}"/>
                     </div>
                 </div>
             </div>

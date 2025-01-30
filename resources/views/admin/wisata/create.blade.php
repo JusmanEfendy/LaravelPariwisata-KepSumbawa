@@ -41,8 +41,8 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="">Kecamatan</label>
-                        <select name="id_kecamatan" class="form-control">
+                        <label for="kecamatan">Kecamatan</label>
+                        <select id="kecamatan" name="id_kecamatan" class="form-control">
                             <option selected>--- Pilih Kecamatan ---</option>
                             @foreach ($kec as $val)
                                 <option value="{{ $val->id }}">{{ $val->nama }}</option>
@@ -54,12 +54,9 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="">Kelurahan</label>
-                        <select name="id_kelurahan" class="form-control">
+                        <label for="kelurahan">Kelurahan</label>
+                        <select id="kelurahan" name="id_kelurahan" class="form-control">
                             <option selected>--- Pilih Kelurahan ---</option>
-                            @foreach ($kel as $val)
-                                <option value="{{ $val->id }}">{{ $val->nama }}</option>
-                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -117,6 +114,30 @@
                 old.lng = e.latlng.lng
                 newMarker = new L.marker(e.latlng).addTo(map)
             })
+
+            $(document).ready(function () {
+        $('#kecamatan').change(function () {
+            var kecamatanID = $(this).val();
+            $('#kelurahan').empty().append('<option value="">-- Pilih Kelurahan --</option>');
+
+            if (kecamatanID) {
+                $.ajax({
+                    url: '/api/kelurahan/' + kecamatanID,
+                    type: 'GET',
+                    success: function (data) {
+                        data.forEach(function (kelurahan) {
+                            $('#kelurahan').append(
+                                '<option value="' + kelurahan.id + '">' + kelurahan.nama + '</option>'
+                            );
+                        });
+                    },
+                    error: function () {
+                        alert('Terjadi kesalahan saat memuat data kelurahan.');
+                    }
+                });
+            }
+        });
+    });
         </script>
     </x-slot>
 </x-app-layout>

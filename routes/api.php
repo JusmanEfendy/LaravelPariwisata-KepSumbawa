@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\WisataApiController;
+use App\Models\Kelurahan;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +22,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/wisata', [WisataApiController::class, 'index']);
+Route::get('/kelurahan/{id_kecamatan}', function ($kecamatan_id) {
+    return Kelurahan::where('id_kecamatan', $kecamatan_id)->get();
+});

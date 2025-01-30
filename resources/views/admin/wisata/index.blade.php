@@ -6,11 +6,13 @@
     @endif
     <x-card>
         <x-slot name="title">List Data Wisata</x-slot>
-        <x-slot name="option">
-            <a href="{{ route('admin.wisata.create') }}" class="btn btn-success">
-                <i class="fas fa-plus"></i>
-            </a>
-        </x-slot>
+        @if(auth()->user()->roles->first()->name == 'Admin')
+            <x-slot name="option">
+                <a href="{{ route('admin.wisata.create') }}" class="btn btn-success">
+                    <i class="fas fa-plus"></i>
+                </a>
+            </x-slot>
+        @endif
         <table class="table table-bordered">
             <thead>
                 <th>Wisata</th>
@@ -35,6 +37,7 @@
                                 data-lokasi="{{ $wis->kelurahan->nama }}, {{ $wis->kecamatan->nama }} - {{ $wis->kabupaten->nama }}">
                                 <i class="fas fa-eye"></i>
                             </button>
+                            @if(auth()->user()->roles->first()->name == 'Admin')
                             <a href="{{ route('admin.wisata.edit', $wis->id) }}" class="btn btn-primary mr-1"><i
                                     class="fas fa-edit"></i></a>
                             <form action="{{ route('admin.wisata.delete', $wis->id) }}" style="display: inline-block;"
@@ -43,6 +46,7 @@
                                 <button type="button" class="btn btn-danger delete"><i
                                         class="fas fa-trash"></i></button>
                             </form>
+                            @endif
                         </td>
                     </tr>
                 @empty
