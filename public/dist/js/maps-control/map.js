@@ -50,101 +50,92 @@ $(document).ready(function () {
             routeLat.push(value.lat);
             routeLng.push(value.lng);
 
-            if (value.nama_kategori == "Pantai") {
-                let marker = new L.marker(
-                    [parseFloat(value.lat), parseFloat(value.lng)],
-                    {
-                        icon: pantaiIcon,
-                    }
-                )
-                    .on("click", markerOnClick)
-                    .addTo(map);
-                pantaiMarker.push({
-                    marker: marker,
-                    koordinat: [parseFloat(value.lat), parseFloat(value.lng)],
-                });
-            } else if (value.nama_kategori == "Gunung") {
-                let marker = new L.marker(
-                    [parseFloat(value.lat), parseFloat(value.lng)],
-                    {
-                        icon: gunungIcon,
-                    }
-                )
-                    .on("click", markerOnClick)
-                    .addTo(map);
-                gunungMarker.push({
-                    marker: marker,
-                    koordinat: [parseFloat(value.lat), parseFloat(value.lng)],
-                });
-            } else if (value.nama_kategori == "Pulau") {
-                let marker = new L.marker(
-                    [parseFloat(value.lat), parseFloat(value.lng)],
-                    {
-                        icon: pulauIcon,
-                    }
-                )
-                    .on("click", markerOnClick)
-                    .addTo(map);
-                pulauMarker.push({
-                    marker: marker,
-                    koordinat: [parseFloat(value.lat), parseFloat(value.lng)],
-                });
-            } else if (value.nama_kategori == "Taman") {
-                let marker = new L.marker(
-                    [parseFloat(value.lat), parseFloat(value.lng)],
-                    {
-                        icon: tamanIcon,
-                    }
-                )
-                    .on("click", markerOnClick)
-                    .addTo(map);
-                tamanMarker.push({
-                    marker: marker,
-                    koordinat: [parseFloat(value.lat), parseFloat(value.lng)],
-                });
-            } else if (value.nama_kategori == "Air Terjun") {
-                let marker = new L.marker(
-                    [parseFloat(value.lat), parseFloat(value.lng)],
-                    {
-                        icon: airTerjunIcon,
-                    }
-                )
-                    .on("click", markerOnClick)
-                    .addTo(map);
-                airTerjunMarker.push({
-                    marker: marker,
-                    koordinat: [parseFloat(value.lat), parseFloat(value.lng)],
-                });
-            }
-            function markerOnClick() {
-                detailLat = value.lat;
-                detailLng = value.lng;
+            let icon;
+            let categoryArray;
 
-                $("#detailModal").modal("show");
-                function wisataDetail() {
-                    return `<div class="container-fluid">
-                          <div class="row">
-                              <div class="col-md-3">
-                                  <img src="storage/public/wisata_images/${value.gambar}" class="img-fluid">
-                              </div>
-                                  <div class="col-md">
-                                      <ul class="list-group">
-                                          <li class="list-group-item"><h4>${value.nama_wisata} (${value.nama_kategori})</h4></li>
-                                          <li class="list-group-item"><strong>Lokasi    : </strong>${value.nama_kelurahan}, ${value.nama_kecamatan} - ${value.nama_kabupaten}</li>
-                                          <li class="list-group-item"><strong>Koordinat : </strong>${value.lat}, ${value.lng}</li>
-                                          <li class="list-group-item"><strong>Fasilitas : </strong>${value.fasilitas}</li>
-                                          <li class="list-group-item"><strong>Jam Buka  : </strong>00:00 - 23:59</li>
-                                          <li class="list-group-item"><br> ${value.deskripsi}</li>
-                                      </ul>
-                                  </div>
-                          </div>
-                      </div>`;
-                }
-                $("#detailModal").find(".modal-body").html(wisataDetail);
+            // Menentukan icon berdasarkan kategori
+            switch (value.nama_kategori) {
+                case "Pantai":
+                    icon = pantaiIcon;
+                    categoryArray = pantaiMarker;
+                    break;
+                case "Gunung":
+                    icon = gunungIcon;
+                    categoryArray = gunungMarker;
+                    break;
+                case "Pulau":
+                    icon = pulauIcon;
+                    categoryArray = pulauMarker;
+                    break;
+                case "Taman":
+                    icon = tamanIcon;
+                    categoryArray = tamanMarker;
+                    break;
+                case "Air Terjun":
+                    icon = airTerjunIcon;
+                    categoryArray = airTerjunMarker;
+                    break;
+                default:
+                    icon = defaultIcon;
+                    categoryArray = [];
             }
+
+            // Tambahkan marker ke peta
+            let marker = new L.marker(
+                [parseFloat(value.lat), parseFloat(value.lng)],
+                { icon: icon }
+            )
+                .on("click", function () {
+                    markerOnClick(value);
+                })
+                .addTo(map);
+
+            // Tambahkan tooltip saat hover
+            marker.bindTooltip(`<b>${value.nama_wisata}</b><br>${value.nama_kategori}`, {
+                permanent: false, // Muncul hanya saat di-hover
+                direction: "top",
+            });
+
+            // Simpan marker ke array kategori
+            categoryArray.push({
+                marker: marker,
+                koordinat: [parseFloat(value.lat), parseFloat(value.lng)],
+            });
         });
     });
+
+    // Fungsi untuk menampilkan detail wisata
+    function markerOnClick(value) {
+        detailLat = value.lat;
+        detailLng = value.lng;
+
+        $("#detailModal").modal("show");
+
+        function wisataDetail() {
+            return `<div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-3">
+                        <img src="storage/public/wisata_images/${value.gambar}" class="img-fluid">
+                    </div>
+                    <div class="col-md">
+                        <ul class="list-group">
+                            <li class="list-group-item"><h4>${value.nama_wisata} (${value.nama_kategori})</h4></li>
+                            <li class="list-group-item"><strong>Lokasi    : </strong>${value.nama_kelurahan}, ${value.nama_kecamatan} - ${value.nama_kabupaten}</li>
+                            <li class="list-group-item"><strong>Koordinat : </strong>${value.lat}, ${value.lng}</li>
+                            <li class="list-group-item"><strong>Fasilitas : </strong>${value.fasilitas}</li>
+                            <li class="list-group-item"><strong>Jam Buka  : </strong>00:00 - 23:59</li>
+                            <li class="list-group-item"><br> ${value.deskripsi}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>`;
+        }
+
+        // Pastikan fungsi dieksekusi dengan ()
+        $("#detailModal").find(".modal-body").html(wisataDetail());
+    }
 });
+
 
 // POLYGON KEPULAUAN SUMBAWA
 let geoLayer;
