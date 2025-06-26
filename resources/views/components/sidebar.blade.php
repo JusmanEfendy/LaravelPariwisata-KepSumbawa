@@ -58,7 +58,7 @@
     @endcan
 
     {{-- masih butuh perbaikan --}}
-    @if(auth()->user()->roles->first()->name == 'Wisatawan')
+    @if(auth()->user()->roles->first()->name == 'Praktisi Wisata')
     <x-nav-link text="Tambahkan Wisata" icon="th-list" url="{{ route('admin.tambahkan-wisata') }}"
         active="{{ request()->routeIs('admin.tambahkan-wisata') ? ' active' : '' }}" />
     @endif

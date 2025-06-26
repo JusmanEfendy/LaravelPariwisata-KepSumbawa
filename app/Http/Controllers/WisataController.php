@@ -14,7 +14,8 @@ class WisataController extends Controller
 {
     public function index()
     {
-        $wisata = Wisata::with('kategori', 'kelurahan', 'kecamatan', 'kabupaten')->get()->sortBy('nama');
+        // $wisata = Wisata::with('kategori', 'kelurahan', 'kecamatan', 'kabupaten')->get()->sortBy('nama');
+        $wisata = Wisata::paginate(5);
         return view('admin.wisata.index', compact('wisata'));
     }
 

@@ -12,7 +12,8 @@ class KelurahanController extends Controller
 {
     public function index()
     {
-        $kelurahan = Kelurahan::with('kabupaten', 'kecamatan')->get()->sortBy('nama');
+        // $kelurahan = Kelurahan::with('kabupaten', 'kecamatan')->get()->sortBy('nama');
+        $kelurahan = Kelurahan::paginate(10);
         return view('admin.kelurahan.index', compact('kelurahan'));
     }
 

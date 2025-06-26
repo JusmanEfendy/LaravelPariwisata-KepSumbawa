@@ -45,6 +45,9 @@
                 @endforelse
             </tbody>
         </table>
+        <div class="d-flex justify-content-center mt-4">
+            {{ $kecamatan->links() }}
+        </div>
     </x-card>
     <x-modal>
         <x-slot name="id">infoModal</x-slot>
