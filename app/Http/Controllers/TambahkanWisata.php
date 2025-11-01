@@ -14,7 +14,7 @@ class TambahkanWisata extends Controller
 {
     public function index()
     {
-        $tambahkanWisata = WisataApprove::where('user_id', Auth::user()->id)->orderBy('nama', 'asc')->paginate(5);
+        $tambahkanWisata = WisataApprove::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->paginate(5);
         return view('wisatawan.index', compact('tambahkanWisata'));
     }
 

@@ -4,7 +4,7 @@
     </x-slot>
 
     <x-auth-card>
-    
+
         {{-- show alert if there is errors --}}
         <x-alert-error/>
 
@@ -24,12 +24,12 @@
 
             <!-- Password confirmation field -->
             <x-input type="password" text="Password Confirmation" name="password_confirmation" />
-            
+
             <x-button type="primary btn-block" text="Register" for="submit" />
         </form>
         <hr>
         <div class="text-center">
-            <a class="font-weight-bold small" href="{{ route('login') }}">Already have an account?</a>
+            <a class="font-weight-bold small" href="{{ route('login') }}">Sudah Punya Akun ?</a>
         </div>
     </x-auth-card>
 </x-guest-layout>
